@@ -11,7 +11,7 @@ const Hero: React.FC<HeroProps> = ({ children }) => {
     <Flex className="zd-hero">
       <div className="decorative-circle" />
       <img src={NikeImgSrc} alt="Womens Nike Air Force" />
-      <Wrapper>{children}</Wrapper>
+      <Wrapper className="blahblabla">{children}</Wrapper>
     </Flex>
   );
 };

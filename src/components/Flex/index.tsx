@@ -14,8 +14,8 @@ const Flex: React.FC<FlexProps> = ({
   ...props
 }) => {
   let classes = [
-    alignCenter && 'align-center',
-    justifyCenter && 'justify-center',
+    alignCenter ? 'align-center' : '',
+    justifyCenter ? 'justify-center' : '',
   ].join(' ');
 
   return (
