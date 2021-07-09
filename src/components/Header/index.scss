@@ -2,4 +2,25 @@
   background: #140ca3;
   width: 100%;
   color: #fff;
+  padding: 155px;
+  height: 500px;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+
+  > .decorative-circle {
+    position: absolute;
+    top: 70px;
+    width: 890px;
+    height: 840px;
+    border-radius: 50%;
+    background: #fef2f4;
+    left: 55%;
+  }
+
+  > img {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
 }

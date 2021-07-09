@@ -13,4 +13,9 @@
   &:hover {
     background: #e4e3ff;
   }
+
+  &:active {
+    transition: 0s;
+    background: #bdbce2;
+  }
 }

@@ -1,5 +1,11 @@
 .zd-flex {
   display: flex;
-  align-items: center;
-  justify-content: center;
+
+  &.align-center {
+    align-items: center;
+  }
+
+  &.justify-center {
+    justify-content: center;
+  }
 }
