@@ -1,14 +1,14 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import Button from 'components/Button';
 import Flex from 'components/Flex';
-import { Header } from './index';
+import Hero from './index';
 
 export default {
-  title: 'Example/Header',
-  component: Header,
-} as ComponentMeta<typeof Header>;
+  title: 'Hero',
+  component: Hero,
+} as ComponentMeta<typeof Hero>;
 
-const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />;
+const Template: ComponentStory<typeof Hero> = (args) => <Hero {...args} />;
 
 export const NoChildren = Template.bind({});
 NoChildren.args = {
