@@ -1,5 +1,5 @@
 import Flex from 'components/Flex';
-import React, { useState } from 'react';
+import React from 'react';
 import './index.scss';
 
 interface ProductProps {

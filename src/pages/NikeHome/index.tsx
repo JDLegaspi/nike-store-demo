@@ -1,3 +1,4 @@
+import { waitFor } from '@testing-library/react';
 import axios from 'axios';
 import Button from 'components/Button';
 import Flex from 'components/Flex';
@@ -5,19 +6,25 @@ import Hero from 'components/Hero';
 import SearchResults from 'components/SearchResults';
 import Wrapper from 'components/Wrapper';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Product } from 'types/Product';
+import { Product, SearchResultsAPIResponse } from 'types/Product';
 import './index.scss';
 
 const Nike: React.FC = () => {
-  const [products, setProducts] = useState<Product[]>();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [totalNumberProducts, setTotalNumberProducts] = useState<number>(0);
+  const [retailers, setRetailers] = useState<string[]>([]);
+  const [queryPage, setQueryPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(0);
   const [productsLoading, setProductsLoading] = useState<boolean>(false);
-  const [productsError, setProductsError] = useState<boolean>(false);
+  const [productsError, setProductsError] = useState<string>();
 
   const getProducts = useCallback(async () => {
-    if (products === undefined) {
+    if (currentPage !== queryPage) {
+      setProductsLoading(true);
+
       try {
-        let productsResponse = await axios.get(
-          'https://api.theurge.com.au/search-results?brands=Nike'
+        let productsResponse = await axios.get<SearchResultsAPIResponse>(
+          `https://api.theurge.com.au/search-results?brands=Nike&page=${queryPage}`
         );
 
         if (productsResponse.status !== 200) {
@@ -26,12 +33,30 @@ const Nike: React.FC = () => {
           );
         }
 
-        setProducts(productsResponse.data.data);
+        let newRetailersList: string[] = [...retailers];
+
+        for (const productResponseItem of productsResponse.data.data) {
+          let retailerName =
+            productResponseItem.attributes.e_retailer_facet_name;
+
+          if (!newRetailersList.includes(retailerName))
+            newRetailersList.push(retailerName);
+        }
+
+        setCurrentPage(queryPage);
+        setProducts([...products, ...productsResponse.data.data]);
+        setTotalNumberProducts(productsResponse.data.meta.meta.total);
+        setRetailers(newRetailersList);
+        setProductsLoading(false);
       } catch (e) {
         setProductsError(e.toString());
       }
     }
-  }, []);
+  }, [products, retailers, queryPage, currentPage]);
+
+  function handleScrollToBottom() {
+    setQueryPage(queryPage + 1);
+  }
 
   useEffect(() => {
     getProducts();
@@ -52,7 +77,14 @@ const Nike: React.FC = () => {
         </div>
       </Hero>
       <Wrapper>
-        {products !== undefined ? <SearchResults products={products} /> : null}
+        <SearchResults
+          products={products}
+          productsLoading={productsLoading && retailers.length === 0}
+          productsError={productsError}
+          totalNumberProducts={totalNumberProducts}
+          totalNumberRetailers={retailers.length}
+          onScrollToBottom={handleScrollToBottom}
+        />
       </Wrapper>
     </div>
   );
