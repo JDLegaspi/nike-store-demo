@@ -1,0 +1,18 @@
+@import '/src/index.scss';
+
+.zd-search-info {
+  padding-bottom: 18px;
+
+  .zd-related-searches {
+    font-size: 20px;
+
+    @media screen and (max-width: $breakpointMobileLarge) {
+      display: none;
+    }
+  }
+
+  .zd-results-number {
+    font-size: 18px;
+    color: $extraInfoColor;
+  }
+}

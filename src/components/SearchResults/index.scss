@@ -1,8 +1,9 @@
 @import '/src/components/Product/index.scss';
 
 .zd-search-results {
+  padding: 50px 0;
+
   .zd-search-results-items {
-    padding: 50px 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax($product-width, 1fr));
     grid-gap: 24px;

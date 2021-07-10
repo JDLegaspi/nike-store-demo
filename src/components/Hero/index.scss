@@ -1,7 +1,13 @@
+@import '/src/index.scss';
+
+$circleWidth: 890px;
+$circleHeight: 840px;
+
 .zd-hero {
-  background: #140ca3;
+  background: $primaryColor;
   width: 100%;
-  color: #fff;
+  color: $heroBackground;
+  padding: 155px;
   height: 500px;
   box-sizing: border-box;
   position: relative;
@@ -9,11 +15,11 @@
 
   > .decorative-circle {
     position: absolute;
-    top: 70px;
-    width: 890px;
-    height: 840px;
+    top: 10%;
+    width: $circleWidth;
+    height: $circleHeight;
     border-radius: 50%;
-    background: #fef2f4;
+    background: $whispPink;
     left: 55%;
   }
 
@@ -21,5 +27,27 @@
     position: absolute;
     right: 0;
     bottom: 0;
+  }
+
+  @media screen and (max-width: $breakpointTablet) {
+    padding: 0;
+
+    > .decorative-circle {
+      width: $circleWidth * 0.8;
+      height: $circleHeight * 0.8;
+      top: 25%;
+    }
+    > img {
+      height: 80%;
+    }
+  }
+
+  @media screen and (max-width: $breakpointMobileLarge) {
+    height: 400px;
+
+    > .decorative-circle,
+    > img {
+      display: none;
+    }
   }
 }

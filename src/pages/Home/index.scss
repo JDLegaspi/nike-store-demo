@@ -1,0 +1,12 @@
+@import '/src/index.scss';
+
+.zd-home-page-content {
+  @media screen and (max-width: $breakpointMobile) {
+    h1 {
+      font-size: 44px;
+    }
+    h2 {
+      font-size: 24px;
+    }
+  }
+}

@@ -1,3 +1,5 @@
+@import '/src/index.scss';
+
 $product-width: 264px;
 $class-name: zd-product;
 
@@ -29,7 +31,7 @@ $class-name: zd-product;
 
     .#{$class-name}-retail-url {
       font-weight: 500;
-      color: #140ca3;
+      color: $linkColor;
       font-size: 15px;
     }
 
@@ -39,14 +41,14 @@ $class-name: zd-product;
       .discounted-price {
         margin-left: 8px;
         font-size: 14px;
-        color: rgb(221, 125, 125);
+        color: $discountColor;
         text-decoration: line-through;
       }
     }
 
     .#{$class-name}-payment-plan {
       font-size: 12px;
-      color: #525761;
+      color: $extraInfoColor;
     }
   }
 }
