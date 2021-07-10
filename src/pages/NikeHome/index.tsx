@@ -20,14 +20,13 @@ const Nike: React.FC = () => {
           'https://api.theurge.com.au/search-results?brands=Nike'
         );
 
-        console.log(productsResponse.data);
-        console.log(productsResponse.status);
-
         if (productsResponse.status !== 200) {
           throw Error(
             'There was a problem getting the search results. Please un-rig the endpoint to fail and try again.'
           );
         }
+
+        setProducts(productsResponse.data.data);
       } catch (e) {
         setProductsError(e.toString());
       }
@@ -53,7 +52,7 @@ const Nike: React.FC = () => {
         </div>
       </Hero>
       <Wrapper>
-        <SearchResults />
+        {products !== undefined ? <SearchResults products={products} /> : null}
       </Wrapper>
     </div>
   );

@@ -1,5 +1,5 @@
 import Flex from 'components/Flex';
-import React from 'react';
+import React, { useState } from 'react';
 import './index.scss';
 
 interface ProductProps {
@@ -37,7 +37,9 @@ const Product: React.FC<ProductProps> = ({
   }
 
   function getPriceElement(): React.ReactNode {
-    let shownPrice = getPriceRounded((salePrice ?? retailerPrice) / 4);
+    let shownPrice = getPriceRounded((salePrice ?? retailerPrice) / 4).toFixed(
+      2
+    );
 
     let priceString: string = `${getCurrencyString()}${shownPrice}`;
 
