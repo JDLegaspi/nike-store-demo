@@ -2,7 +2,7 @@ export interface ProductAttributes {
   availability: string;
   converted_currency: string;
   converted_retailer_price: number;
-  converted_sale_price?: number;
+  converted_sale_price: number;
   currency: string;
   e_affiliate_url: string;
   e_brand_formatted: string;

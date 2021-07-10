@@ -1,4 +1,3 @@
-import { waitFor } from '@testing-library/react';
 import axios from 'axios';
 import Button from 'components/Button';
 import Flex from 'components/Flex';
@@ -24,7 +23,7 @@ const Nike: React.FC = () => {
 
       try {
         let productsResponse = await axios.get<SearchResultsAPIResponse>(
-          `https://api.theurge.com.au/search-results?brands=Nike&page=${queryPage}`
+          `https://api.theurge.com.au/search-results?brands=Nike&page=${queryPage}&currency=AUD`
         );
 
         if (productsResponse.status !== 200) {
@@ -34,8 +33,9 @@ const Nike: React.FC = () => {
         }
 
         let newRetailersList: string[] = [...retailers];
+        let queriedSearchResultsData = productsResponse.data.data;
 
-        for (const productResponseItem of productsResponse.data.data) {
+        for (const productResponseItem of queriedSearchResultsData) {
           let retailerName =
             productResponseItem.attributes.e_retailer_facet_name;
 
@@ -44,12 +44,13 @@ const Nike: React.FC = () => {
         }
 
         setCurrentPage(queryPage);
-        setProducts([...products, ...productsResponse.data.data]);
+        setProducts([...products, ...queriedSearchResultsData]);
         setTotalNumberProducts(productsResponse.data.meta.meta.total);
         setRetailers(newRetailersList);
         setProductsLoading(false);
       } catch (e) {
         setProductsError(e.toString());
+        setProductsLoading(false);
       }
     }
   }, [products, retailers, queryPage, currentPage]);

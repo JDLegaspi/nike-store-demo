@@ -13,9 +13,9 @@ interface ProductProps {
 
 const Product: React.FC<ProductProps> = ({
   currency,
-  retailerPrice,
   retailerUrl,
   productName,
+  retailerPrice,
   salePrice,
   imageUrl,
 }) => {
@@ -23,7 +23,7 @@ const Product: React.FC<ProductProps> = ({
   const strippedUrl = urlArray[2];
 
   function getPriceRounded(price: number) {
-    return Math.round(price * 100) / 100;
+    return (Math.round(price * 100) / 100).toFixed(2);
   }
 
   function getCurrencyString(): string {
@@ -37,9 +37,7 @@ const Product: React.FC<ProductProps> = ({
   }
 
   function getPriceElement(): React.ReactNode {
-    let shownPrice = getPriceRounded((salePrice ?? retailerPrice) / 4).toFixed(
-      2
-    );
+    let shownPrice = getPriceRounded((salePrice ?? retailerPrice) / 4);
 
     let priceString: string = `${getCurrencyString()}${shownPrice}`;
 

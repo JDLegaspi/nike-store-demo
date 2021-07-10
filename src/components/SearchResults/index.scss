@@ -1,4 +1,5 @@
 @import '/src/components/Product/index.scss';
+@import '/src/styles/colors.scss';
 
 .zd-search-results {
   padding: 50px 0;
@@ -8,4 +9,9 @@
     grid-template-columns: repeat(auto-fit, minmax($product-width, 1fr));
     grid-gap: 24px;
   }
+}
+
+.zd-search-error {
+  margin-top: 20px;
+  color: $errorText;
 }

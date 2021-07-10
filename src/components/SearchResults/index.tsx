@@ -27,7 +27,11 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   }
 
   if (productsLoading) {
-    return <h4>Loading products...</h4>;
+    return (
+      <div style={{ marginTop: 20 }}>
+        <h4>Loading products...</h4>
+      </div>
+    );
   }
 
   return (
@@ -47,16 +51,42 @@ const SearchResults: React.FC<SearchResultsProps> = ({
         }
       >
         <div className="zd-search-results-items">
-          {products.map((product) => (
-            <Product
-              imageUrl={product.attributes.e_image_urls_detail_jpg[0][0]}
-              currency={product.attributes.currency}
-              productName={product.attributes.product_name}
-              retailerUrl={product.attributes.retailer_url}
-              retailerPrice={product.attributes.retailer_price}
-              salePrice={product.attributes.sale_price}
-            />
-          ))}
+          {products.map((product) => {
+            const {
+              attributes: {
+                e_image_urls_detail_jpg,
+                converted_currency,
+                converted_retailer_price,
+                converted_sale_price,
+                currency,
+                product_name,
+                retailer_url,
+                retailer_price,
+                sale_price,
+              },
+            } = product;
+
+            return (
+              <Product
+                imageUrl={e_image_urls_detail_jpg[0][0]}
+                currency={
+                  converted_currency !== '' ? converted_currency : currency
+                }
+                productName={product_name}
+                retailerUrl={retailer_url}
+                retailerPrice={
+                  converted_currency !== ''
+                    ? converted_retailer_price
+                    : retailer_price
+                }
+                salePrice={
+                  converted_currency !== '' && converted_sale_price > 0
+                    ? converted_sale_price
+                    : sale_price
+                }
+              />
+            );
+          })}
         </div>
       </InfiniteScroll>
     </div>
