@@ -4,9 +4,7 @@ import Wrapper from '../Wrapper';
 import './index.scss';
 import NikeImgSrc from 'assets/images/nike_1.png';
 
-interface HeroProps {}
-
-const Hero: React.FC<HeroProps> = ({ children }) => {
+const Hero: React.FC = ({ children }) => {
   return (
     <Flex alignItems="center" className="zd-hero">
       <div className="decorative-circle" />

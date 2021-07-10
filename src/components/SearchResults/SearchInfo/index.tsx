@@ -2,9 +2,7 @@ import Flex from 'components/Flex';
 import React from 'react';
 import './index.scss';
 
-interface SearchInfoProps {}
-
-const SearchInfo: React.FC<SearchInfoProps> = () => {
+const SearchInfo: React.FC = () => {
   return (
     <Flex justifyContent="space-between" className="zd-search-info">
       <div className="zd-related-searches">

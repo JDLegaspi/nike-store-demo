@@ -2,7 +2,7 @@ import Flex from 'components/Flex';
 import React from 'react';
 import './index.scss';
 
-interface WrapperProps extends React.HTMLProps<HTMLDivElement> {}
+type WrapperProps = React.HTMLProps<HTMLDivElement>;
 
 const Wrapper: React.FC<WrapperProps> = ({ children, className, ...props }) => (
   <Flex

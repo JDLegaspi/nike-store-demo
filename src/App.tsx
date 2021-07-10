@@ -1,4 +1,4 @@
-import HomePage from 'pages/Home';
+import NikeHome from 'pages/NikeHome';
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
@@ -8,7 +8,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/">
-          <HomePage />
+          <NikeHome />
         </Route>
       </Switch>
     </Router>
