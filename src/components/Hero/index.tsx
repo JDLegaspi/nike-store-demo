@@ -8,10 +8,10 @@ interface HeroProps {}
 
 const Hero: React.FC<HeroProps> = ({ children }) => {
   return (
-    <Flex className="zd-hero">
+    <Flex alignItems="center" className="zd-hero">
       <div className="decorative-circle" />
       <img src={NikeImgSrc} alt="Womens Nike Air Force" />
-      <Wrapper className="blahblabla">{children}</Wrapper>
+      <Wrapper>{children}</Wrapper>
     </Flex>
   );
 };

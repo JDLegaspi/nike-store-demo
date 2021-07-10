@@ -8,7 +8,9 @@ export default {
 } as ComponentMeta<typeof Product>;
 
 const Template: ComponentStory<typeof Product> = (args) => (
-  <Product {...args} />
+  <div style={{ width: 264 }}>
+    <Product {...args} />
+  </div>
 );
 
 export const Nike = Template.bind({});

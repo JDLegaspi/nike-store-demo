@@ -1,46 +1,52 @@
-.zd-product {
-  width: 264px;
-  cursor: pointer;
+$product-width: 264px;
+$class-name: zd-product;
 
-  > .zd-product-img-wrapper {
-    height: 400px;
-    overflow: hidden;
-    border-radius: 20px;
-    margin-bottom: 22px;
+.#{$class-name} {
+  min-width: $product-width;
 
-    > img {
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
+  .#{$class-name}-inner {
+    cursor: pointer;
+
+    .#{$class-name}-img-wrapper {
+      height: 400px;
+      overflow: hidden;
+      border-radius: 20px;
+      margin-bottom: 22px;
+
+      > img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+      }
     }
-  }
 
-  .zd-product-name {
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 130%;
-    margin: 0;
-  }
-
-  .zd-product-retail-url {
-    font-weight: 500;
-    color: #140ca3;
-    font-size: 15px;
-  }
-
-  .zd-product-price {
-    font-weight: 600;
-
-    .discounted-price {
-      margin-left: 8px;
-      font-size: 14px;
-      color: rgb(221, 125, 125);
-      text-decoration: line-through;
+    .#{$class-name}-name {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 130%;
+      margin: 0;
     }
-  }
 
-  .zd-product-payment-plan {
-    font-size: 12px;
-    color: #525761;
+    .#{$class-name}-retail-url {
+      font-weight: 500;
+      color: #140ca3;
+      font-size: 15px;
+    }
+
+    .#{$class-name}-price {
+      font-weight: 600;
+
+      .discounted-price {
+        margin-left: 8px;
+        font-size: 14px;
+        color: rgb(221, 125, 125);
+        text-decoration: line-through;
+      }
+    }
+
+    .#{$class-name}-payment-plan {
+      font-size: 12px;
+      color: #525761;
+    }
   }
 }

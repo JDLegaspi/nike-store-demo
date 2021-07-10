@@ -1,9 +1,9 @@
 .zd-wrapper-outer {
-  display: flex;
-  justify-content: center;
-}
-
-.zd-wrapper {
-  max-width: 1200px;
   width: 100%;
+
+  .zd-wrapper {
+    max-width: 1200px;
+    width: 100%;
+    padding: 0 20px;
+  }
 }
