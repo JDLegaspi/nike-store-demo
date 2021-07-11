@@ -46,6 +46,10 @@ $className: zd-product-page;
 .#{$className}-info {
   padding-left: 24px;
 
+  .#{$className}-info-section {
+    padding-top: 24px;
+  }
+
   @media screen and (max-width: $breakpointMobileLarge) {
     padding-left: 0;
   }

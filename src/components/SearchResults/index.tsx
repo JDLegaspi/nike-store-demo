@@ -25,7 +25,6 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   onScrollToBottom,
   onSelectProduct,
 }) => {
-  console.log(JSON.stringify(products));
   function handleProductClick(product: ProductObject) {
     onSelectProduct(product);
   }

@@ -25,6 +25,8 @@ const ProductPage: React.FC<ProductPageProps> = ({ product }) => {
       converted_retailer_price,
       converted_sale_price,
       gender,
+      e_shipping_link,
+      e_returns_link,
     },
   } = product;
 
@@ -60,7 +62,24 @@ const ProductPage: React.FC<ProductPageProps> = ({ product }) => {
               <Button primary>Buy now</Button>
               <Button>Add to cart</Button>
             </Flex>
-            <p>{ReactHtmlParser(long_description)}</p>
+            <div className="zd-product-page-info-section">
+              <h4>Description</h4>
+              <p>{ReactHtmlParser(long_description)}</p>
+            </div>
+            {(e_shipping_link || e_returns_link) && (
+              <div className="zd-product-page-info-section">
+                <h4>Shipping and returns</h4>
+                <p>
+                  <a href={e_shipping_link} target="_blank" rel="noreferrer">
+                    Our shipping policy
+                  </a>
+                  <br />
+                  <a href={e_returns_link} target="_blank" rel="noreferrer">
+                    Our returns policy
+                  </a>
+                </p>
+              </div>
+            )}
           </div>
         </Flex>
       </Wrapper>

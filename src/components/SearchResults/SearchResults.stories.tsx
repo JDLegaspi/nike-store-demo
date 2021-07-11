@@ -134,8 +134,8 @@ TwentyItems.args = {
   onSelectProduct: (product?: Product) => {},
 };
 
-export const TwentyItemsWithHero = TemplateWithHero.bind({});
-TwentyItemsWithHero.args = {
+export const WithHero = TemplateWithHero.bind({});
+WithHero.args = {
   products: new Array(20).fill(exampleProduct),
   totalNumberProducts: 20,
   totalNumberRetailers: 12,
