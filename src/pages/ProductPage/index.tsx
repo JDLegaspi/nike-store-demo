@@ -8,10 +8,9 @@ import './index.scss';
 
 interface ProductPageProps {
   product: Product;
-  onBackClick: () => void;
 }
 
-const ProductPage: React.FC<ProductPageProps> = ({ product, onBackClick }) => {
+const ProductPage: React.FC<ProductPageProps> = ({ product }) => {
   const {
     attributes: {
       e_image_urls_og,
@@ -49,7 +48,11 @@ const ProductPage: React.FC<ProductPageProps> = ({ product, onBackClick }) => {
                 salePrice={
                   converted_sale_price !== 0 ? converted_sale_price : sale_price
                 }
-                currency={converted_currency ?? currency}
+                currency={
+                  converted_currency !== undefined
+                    ? converted_currency
+                    : currency
+                }
               />
             </div>
             <p>{ReactHtmlParser(long_description)}</p>

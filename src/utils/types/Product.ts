@@ -59,6 +59,7 @@ export interface Product {
   attributes: ProductAttributes;
 }
 
+// Response interface from api.theurge.com.au/search-results
 export interface SearchResultsAPIResponse {
   data: Product[];
   meta: {

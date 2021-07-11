@@ -9,10 +9,10 @@ function App() {
         <Route exact path="/">
           <HomePage />
         </Route>
-        <Route exact path={`/Mens`}>
+        <Route path={`/Mens`}>
           <HomePage gender="male" />
         </Route>
-        <Route exact path={`/Womens`}>
+        <Route path={`/Womens`}>
           <HomePage gender="female" />
         </Route>
       </Switch>

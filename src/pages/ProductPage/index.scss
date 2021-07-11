@@ -13,9 +13,9 @@ $className: zd-product-page;
   > img {
     transition: 0.2s;
     object-fit: cover;
+    border-radius: 20px;
 
     width: 100%;
-    height: 100%;
   }
 }
 
@@ -45,7 +45,6 @@ $className: zd-product-page;
 
 .#{$className}-info {
   padding-left: 24px;
-  padding-top: 24px;
 
   @media screen and (max-width: $breakpointMobile) {
     padding-left: 0;

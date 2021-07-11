@@ -6,6 +6,7 @@ import SearchResults from 'components/SearchResults';
 import Wrapper from 'components/Wrapper';
 import ProductPage from 'pages/ProductPage';
 import React, { useCallback, useEffect, useState } from 'react';
+import ReactModal from 'react-modal';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Product, SearchResultsAPIResponse } from 'utils/types/Product';
 import './index.scss';
@@ -82,19 +83,19 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
   useEffect(() => {
     if (gender !== currentGender) {
       setCurrentGender(gender ?? undefined);
-      resetSearch();
+      setProducts([]);
+      setQueryPage(1);
+      setCurrentPage(0);
+      setSelectedProduct(undefined);
     }
   }, [gender, currentGender]);
 
-  function resetSearch() {
-    setProducts([]);
-    setQueryPage(1);
-    setCurrentPage(0);
-    setSelectedProduct(undefined);
-  }
-
   function handleSelectProduct(product?: Product) {
     setSelectedProduct(product ?? undefined);
+  }
+
+  function handleUnselectProduct() {
+    setSelectedProduct(undefined);
   }
 
   function handleScrollToBottom() {
@@ -102,7 +103,6 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
   }
 
   function handleSelectGender(selectedGender: string) {
-    resetSearch();
     history.push(`/${selectedGender}`);
   }
 
@@ -131,29 +131,41 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
     );
   }
 
-  if (selectedProduct)
-    return (
-      <ProductPage
-        product={selectedProduct}
-        onBackClick={() => setSelectedProduct(undefined)}
-      />
-    );
-
   return (
-    <div>
-      {getHeader()}
-      <Wrapper>
-        <SearchResults
-          products={products}
-          productsLoading={productsLoading && products.length === 0}
-          productsError={productsError}
-          totalNumberProducts={totalNumberProducts}
-          totalNumberRetailers={retailers.length}
-          onScrollToBottom={handleScrollToBottom}
-          onSelectProduct={handleSelectProduct}
-        />
-      </Wrapper>
-    </div>
+    <>
+      <div>
+        {getHeader()}
+        <Wrapper>
+          <SearchResults
+            products={products}
+            productsLoading={productsLoading && products.length === 0}
+            productsError={productsError}
+            totalNumberProducts={totalNumberProducts}
+            totalNumberRetailers={retailers.length}
+            onScrollToBottom={handleScrollToBottom}
+            onSelectProduct={handleSelectProduct}
+          />
+        </Wrapper>
+      </div>
+      <ReactModal
+        isOpen={selectedProduct !== undefined}
+        onRequestClose={handleUnselectProduct}
+      >
+        {selectedProduct !== undefined && (
+          <div className="zd-modal-product">
+            <Flex justifyContent="flex-end">
+              <div
+                className="zd-modal-close-button"
+                onClick={handleUnselectProduct}
+              >
+                close
+              </div>
+            </Flex>
+            <ProductPage product={selectedProduct} />
+          </div>
+        )}
+      </ReactModal>
+    </>
   );
 };
 

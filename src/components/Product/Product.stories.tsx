@@ -18,7 +18,7 @@ Nike.args = {
   imageUrl: ExampleImageNike,
   currency: 'USD',
   productName: 'Nike Pegasus Trail 2 GORE-TEX',
-  retailerUrl: 'https://www.nike.com/blablabla',
+  retailerUrl: 'www.nike.com',
   retailerPrice: 170,
 };
 
@@ -28,7 +28,7 @@ PantsOnSale.args = {
     'https://images.theurge.com/nike/YohmlSuL3MhySpoxU574yrB0lMs=/main/2x/552-690/black-black-nike-nike-sportswear-tech-fleece-1.jpg',
   currency: 'USD',
   productName: 'Nike Pegasus Trail 2 GORE-TEX',
-  retailerUrl: 'https://www.nikepants.com/dfsd/fs/df/sdf/sdf',
+  retailerUrl: 'www.nikepants.com',
   retailerPrice: 170,
   salePrice: 85,
 };
