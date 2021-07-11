@@ -6,7 +6,7 @@ import Hero from 'components/Hero';
 import SearchResults from 'components/SearchResults';
 import Wrapper from 'components/Wrapper';
 import ProductPage from 'pages/ProductPage';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import ReactModal from 'react-modal';
 import { useHistory, useLocation } from 'react-router-dom';
 import { Product, SearchResultsAPIResponse } from 'utils/types/Product';
@@ -63,11 +63,11 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
         }
 
         setCurrentPage(queryPage);
-        setProducts(
-          queryPage === 1
+        setProducts((products) => {
+          return queryPage === 1
             ? queriedSearchResultsData
-            : [...products, ...queriedSearchResultsData]
-        );
+            : [...products, ...queriedSearchResultsData];
+        });
         setTotalNumberProducts(productsResponse.data.meta.meta.total);
         setRetailers(newRetailersList);
         setProductsLoading(false);
@@ -76,14 +76,7 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
         setProductsLoading(false);
       }
     }
-  }, [
-    products,
-    retailers,
-    queryPage,
-    currentPage,
-    currentGender,
-    selectedCurrency,
-  ]);
+  }, [retailers, queryPage, currentPage, currentGender, selectedCurrency]);
 
   useEffect(() => {
     getProducts();
@@ -115,16 +108,19 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
     setQueryPage(queryPage + 1);
   }
 
-  function handleSelectGender(selectedGender: string) {
-    history.push(`/${selectedGender}`);
-  }
-
   function handleCurrencyChange(currency: string) {
     setSelectedCurrency(currency);
     resetSearch();
   }
 
-  function getHeader() {
+  const handleSelectGender = useCallback(
+    (selectedGender: string) => {
+      history.push(`/${selectedGender}`);
+    },
+    [history]
+  );
+
+  const header = useMemo(() => {
     if (gender) {
       return (
         <Wrapper className="zd-cat-header">
@@ -147,7 +143,7 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
         </div>
       </Hero>
     );
-  }
+  }, [gender, handleSelectGender, location.pathname]);
 
   return (
     <>
@@ -156,7 +152,7 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
           onCurrencyChange={handleCurrencyChange}
           selectedCurrency={selectedCurrency}
         />
-        {getHeader()}
+        {header}
         <Wrapper>
           <SearchResults
             products={products}

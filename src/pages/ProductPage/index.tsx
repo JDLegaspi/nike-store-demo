@@ -30,8 +30,6 @@ const ProductPage: React.FC<ProductPageProps> = ({ product }) => {
     },
   } = product;
 
-  console.log(converted_currency);
-
   return (
     <div>
       <Wrapper className="zd-product-page">
