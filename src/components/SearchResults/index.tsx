@@ -1,11 +1,10 @@
 import Product from 'components/Product';
 import { Product as ProductObject } from 'utils/types/Product';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './index.scss';
 import SearchInfo from './SearchInfo';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import ErrorText from 'components/ErrorText';
-import { useHistory } from 'react-router-dom';
 
 interface SearchResultsProps {
   products: ProductObject[];

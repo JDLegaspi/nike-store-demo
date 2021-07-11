@@ -14,8 +14,8 @@ const SearchInfo: React.FC<SearchInfoProps> = ({
   return (
     <Flex justifyContent="space-between" className="zd-search-info">
       <div className="zd-related-searches">
-        More from Nike - <a href="#">Air Max</a>, <a href="#">Air Jordan</a>,{' '}
-        <a href="#">Flyknit</a>...
+        More from Nike - <a href="/">Air Max</a>, <a href="/">Air Jordan</a>,{' '}
+        <a href="/">Flyknit</a>...
       </div>
       <div className="zd-results-number">
         {totalNumberProducts} products from {totalNumberRetailers} retailers

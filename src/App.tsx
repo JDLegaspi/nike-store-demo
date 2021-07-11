@@ -15,15 +15,6 @@ function App() {
         <Route exact path={`/Womens`}>
           <HomePage gender="female" />
         </Route>
-        <Route path={`/Mens/:productId`}>
-          <HomePage gender="male" />
-        </Route>
-        <Route path={`/Womens/:productId`}>
-          <HomePage gender="female" />
-        </Route>
-        <Route path={`/:productId`}>
-          <HomePage />
-        </Route>
       </Switch>
     </Router>
   );
