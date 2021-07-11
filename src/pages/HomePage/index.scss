@@ -1,4 +1,4 @@
-@import '/src/index.scss';
+@import '/src/utils/styles/breakpoints.scss';
 
 .zd-home-page-content {
   @media screen and (max-width: $breakpointMobile) {
