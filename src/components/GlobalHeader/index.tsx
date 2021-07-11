@@ -1,4 +1,5 @@
 import Flex from 'components/Flex';
+import Wrapper from 'components/Wrapper';
 import React from 'react';
 import './index.scss';
 
@@ -19,19 +20,19 @@ const GlobalHeader: React.FC<GlobalHeaderProps> = ({
   let currencies = ['AUD', 'USD', 'JPY', 'EUR'];
 
   return (
-    <Flex
-      className="zd-global-header"
-      justifyContent="flex-end"
-      alignItems="center"
-    >
-      <div>Selected currency:</div>
-      <select onChange={handleOnChange}>
-        {currencies.map((currency) => (
-          <option selected={selectedCurrency === currency} value={currency}>
-            {currency}
-          </option>
-        ))}
-      </select>
+    <Flex className="zd-global-header">
+      <Wrapper>
+        <Flex justifyContent="flex-end" alignItems="center">
+          <div className="zd-currency-select-label">Selected currency:</div>
+          <select onChange={handleOnChange}>
+            {currencies.map((currency) => (
+              <option selected={selectedCurrency === currency} value={currency}>
+                {currency}
+              </option>
+            ))}
+          </select>
+        </Flex>
+      </Wrapper>
     </Flex>
   );
 };
