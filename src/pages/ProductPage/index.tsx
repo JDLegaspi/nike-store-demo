@@ -9,25 +9,10 @@ import { useHistory, useParams } from 'react-router-dom';
 import ErrorText from 'components/ErrorText';
 
 interface ProductPageProps {
-  products: Product[];
+  product: Product;
 }
 
-const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
-  const history = useHistory();
-
-  console.log('---------------');
-  console.log('hi there');
-  console.log('---------------');
-
-  let { productId } = useParams<{ productId: string }>();
-
-  const product = products.find((product) => product.id === productId);
-
-  if (!product) {
-    history.push('/');
-    return <ErrorText>Could not find product.</ErrorText>;
-  }
-
+const ProductPage: React.FC<ProductPageProps> = ({ product }) => {
   const {
     attributes: {
       e_image_urls_og,

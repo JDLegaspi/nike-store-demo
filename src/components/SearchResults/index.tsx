@@ -5,7 +5,7 @@ import './index.scss';
 import SearchInfo from './SearchInfo';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import ErrorText from 'components/ErrorText';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 
 interface SearchResultsProps {
   products: ProductObject[];
@@ -26,8 +26,8 @@ const SearchResults: React.FC<SearchResultsProps> = ({
 }) => {
   const history = useHistory();
 
-  function handleProductClick(product: ProductObject) {
-    history.push(`/${product.id}`);
+  function handleProductClick(productId: string) {
+    history.push(`/${productId}`);
   }
 
   if (productsError) {
@@ -65,6 +65,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
         <div className="zd-search-results-items">
           {products.map((product) => {
             const {
+              id,
               attributes: {
                 e_image_urls_detail_jpg,
                 e_retailer_display_domain,
@@ -80,6 +81,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
 
             return (
               <Product
+                key={id}
                 imageUrl={e_image_urls_detail_jpg[0][0]}
                 currency={
                   converted_currency !== '' ? converted_currency : currency
@@ -96,7 +98,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                     ? converted_sale_price
                     : sale_price
                 }
-                onProductClick={() => handleProductClick(product)}
+                onProductClick={() => handleProductClick(id)}
               />
             );
           })}
