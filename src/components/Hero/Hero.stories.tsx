@@ -10,11 +10,6 @@ export default {
 
 const Template: ComponentStory<typeof Hero> = (args) => <Hero {...args} />;
 
-export const NoChildren = Template.bind({});
-NoChildren.args = {
-  children: undefined,
-};
-
 export const FullHeader = Template.bind({});
 FullHeader.args = {
   children: (
@@ -26,6 +21,22 @@ FullHeader.args = {
           <Button>Men</Button>
         </div>
         <Button>Women</Button>
+      </Flex>
+    </div>
+  ),
+};
+
+export const DifferentChildren = Template.bind({});
+DifferentChildren.args = {
+  children: (
+    <div>
+      <h1>Completely</h1>
+      <h3 style={{ paddingTop: 8 }}>
+        Diff<strong>e</strong>re<em>n</em>t
+      </h3>
+      <p>Children</p>
+      <Flex style={{ paddingTop: 8 }}>
+        <Button>Another button example</Button>
       </Flex>
     </div>
   ),

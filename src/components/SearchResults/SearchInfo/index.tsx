@@ -18,7 +18,8 @@ const SearchInfo: React.FC<SearchInfoProps> = ({
         <a href="/">Flyknit</a>...
       </div>
       <div className="zd-results-number">
-        {totalNumberProducts} products from {totalNumberRetailers} retailers
+        {totalNumberProducts} product{totalNumberProducts > 1 ? 's' : ''} from{' '}
+        {totalNumberRetailers} retailer{totalNumberRetailers > 1 ? 's' : ''}
       </div>
     </Flex>
   );

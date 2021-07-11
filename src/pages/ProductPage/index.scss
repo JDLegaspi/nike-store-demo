@@ -38,7 +38,7 @@ $className: zd-product-page;
     flex: 1;
   }
 
-  @media screen and (max-width: $breakpointMobile) {
+  @media screen and (max-width: $breakpointMobileLarge) {
     flex-direction: column;
   }
 }
@@ -46,7 +46,7 @@ $className: zd-product-page;
 .#{$className}-info {
   padding-left: 24px;
 
-  @media screen and (max-width: $breakpointMobile) {
+  @media screen and (max-width: $breakpointMobileLarge) {
     padding-left: 0;
   }
 }
