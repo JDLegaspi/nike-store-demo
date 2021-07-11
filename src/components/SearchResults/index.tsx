@@ -5,7 +5,7 @@ import './index.scss';
 import SearchInfo from './SearchInfo';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import ErrorText from 'components/ErrorText';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 interface SearchResultsProps {
   products: ProductObject[];

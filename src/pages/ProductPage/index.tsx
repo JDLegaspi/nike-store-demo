@@ -5,8 +5,6 @@ import { Product } from 'utils/types/Product';
 import ReactHtmlParser from 'react-html-parser';
 import Price from 'components/Price';
 import './index.scss';
-import { useHistory, useParams } from 'react-router-dom';
-import ErrorText from 'components/ErrorText';
 
 interface ProductPageProps {
   product: Product;
