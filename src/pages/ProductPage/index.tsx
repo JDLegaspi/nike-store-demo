@@ -8,9 +8,10 @@ import './index.scss';
 
 interface ProductPageProps {
   product: Product;
+  onBackClick: () => void;
 }
 
-const ProductPage: React.FC<ProductPageProps> = ({ product }) => {
+const ProductPage: React.FC<ProductPageProps> = ({ product, onBackClick }) => {
   const {
     attributes: {
       e_image_urls_og,
@@ -28,32 +29,34 @@ const ProductPage: React.FC<ProductPageProps> = ({ product }) => {
   } = product;
 
   return (
-    <Wrapper className="zd-product-page">
-      <Flex className="zd-product-page-flex-wrapper">
-        <div className="zd-product-page-img-wrapper">
-          <img src={e_image_urls_og} alt={product_name} />
-        </div>
-        <div className="zd-product-page-info">
-          <div className="zd-product-page-gender">{gender}</div>
-          <h2>{product_name}</h2>
-          <div className="zd-product-page-color">{color}</div>
-          <div className="zd-product-page-price">
-            <Price
-              retailerPrice={
-                converted_retailer_price !== 0
-                  ? converted_retailer_price
-                  : retailer_price
-              }
-              salePrice={
-                converted_sale_price !== 0 ? converted_sale_price : sale_price
-              }
-              currency={converted_currency ?? currency}
-            />
+    <div>
+      <Wrapper className="zd-product-page">
+        <Flex className="zd-product-page-flex-wrapper">
+          <div className="zd-product-page-img-wrapper">
+            <img src={e_image_urls_og} alt={product_name} />
           </div>
-          <p>{ReactHtmlParser(long_description)}</p>
-        </div>
-      </Flex>
-    </Wrapper>
+          <div className="zd-product-page-info">
+            <div className="zd-product-page-gender">{gender}</div>
+            <h2>{product_name}</h2>
+            <div className="zd-product-page-color">{color}</div>
+            <div className="zd-product-page-price">
+              <Price
+                retailerPrice={
+                  converted_retailer_price !== 0
+                    ? converted_retailer_price
+                    : retailer_price
+                }
+                salePrice={
+                  converted_sale_price !== 0 ? converted_sale_price : sale_price
+                }
+                currency={converted_currency ?? currency}
+              />
+            </div>
+            <p>{ReactHtmlParser(long_description)}</p>
+          </div>
+        </Flex>
+      </Wrapper>
+    </div>
   );
 };
 

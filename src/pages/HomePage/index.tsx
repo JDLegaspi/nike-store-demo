@@ -6,7 +6,7 @@ import SearchResults from 'components/SearchResults';
 import Wrapper from 'components/Wrapper';
 import ProductPage from 'pages/ProductPage';
 import React, { useCallback, useEffect, useState } from 'react';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Product, SearchResultsAPIResponse } from 'utils/types/Product';
 import './index.scss';
 
@@ -18,7 +18,9 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
   const history = useHistory();
   const location = useLocation();
 
-  const [currentGender, setCurrentGender] = useState<string>();
+  const [currentGender, setCurrentGender] = useState<string | undefined>(
+    gender ?? undefined
+  );
   const [products, setProducts] = useState<Product[]>([]);
   const [totalNumberProducts, setTotalNumberProducts] = useState<number>(0);
   const [retailers, setRetailers] = useState<string[]>([]);
@@ -26,9 +28,7 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [productsLoading, setProductsLoading] = useState<boolean>(false);
   const [productsError, setProductsError] = useState<string>();
-
-  let { productId } = useParams<{ productId: string }>();
-  const selectedProduct = products.find((product) => product.id === productId);
+  const [selectedProduct, setSelectedProduct] = useState<Product>();
 
   const getProducts = useCallback(async () => {
     if (currentPage !== queryPage) {
@@ -60,7 +60,11 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
         }
 
         setCurrentPage(queryPage);
-        setProducts([...products, ...queriedSearchResultsData]);
+        setProducts(
+          queryPage === 1
+            ? queriedSearchResultsData
+            : [...products, ...queriedSearchResultsData]
+        );
         setTotalNumberProducts(productsResponse.data.meta.meta.total);
         setRetailers(newRetailersList);
         setProductsLoading(false);
@@ -84,8 +88,13 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
 
   function resetSearch() {
     setProducts([]);
-    setQueryPage(0);
-    setCurrentPage(1);
+    setQueryPage(1);
+    setCurrentPage(0);
+    setSelectedProduct(undefined);
+  }
+
+  function handleSelectProduct(product?: Product) {
+    setSelectedProduct(product ?? undefined);
   }
 
   function handleScrollToBottom() {
@@ -100,7 +109,7 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
   function getHeader() {
     if (gender) {
       return (
-        <Wrapper>
+        <Wrapper className="zd-cat-header">
           <h1>{location.pathname.split('/')[1]}</h1>
         </Wrapper>
       );
@@ -122,7 +131,13 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
     );
   }
 
-  if (selectedProduct) return <ProductPage product={selectedProduct} />;
+  if (selectedProduct)
+    return (
+      <ProductPage
+        product={selectedProduct}
+        onBackClick={() => setSelectedProduct(undefined)}
+      />
+    );
 
   return (
     <div>
@@ -135,6 +150,7 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
           totalNumberProducts={totalNumberProducts}
           totalNumberRetailers={retailers.length}
           onScrollToBottom={handleScrollToBottom}
+          onSelectProduct={handleSelectProduct}
         />
       </Wrapper>
     </div>

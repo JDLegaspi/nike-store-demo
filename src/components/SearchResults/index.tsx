@@ -1,6 +1,6 @@
 import Product from 'components/Product';
 import { Product as ProductObject } from 'utils/types/Product';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './index.scss';
 import SearchInfo from './SearchInfo';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -14,6 +14,7 @@ interface SearchResultsProps {
   totalNumberProducts: number;
   totalNumberRetailers: number;
   onScrollToBottom: () => void;
+  onSelectProduct: (product?: ProductObject) => void;
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({
@@ -23,11 +24,10 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   totalNumberProducts,
   totalNumberRetailers,
   onScrollToBottom,
+  onSelectProduct,
 }) => {
-  const history = useHistory();
-
-  function handleProductClick(productId: string) {
-    history.push(`/${productId}`);
+  function handleProductClick(product: ProductObject) {
+    onSelectProduct(product);
   }
 
   if (productsError) {
@@ -98,7 +98,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                     ? converted_sale_price
                     : sale_price
                 }
-                onProductClick={() => handleProductClick(id)}
+                onProductClick={() => handleProductClick(product)}
               />
             );
           })}
