@@ -1,5 +1,3 @@
-import { StringMappingType } from 'typescript';
-
 export interface ProductAttributes {
   availability: string;
   converted_currency: string;

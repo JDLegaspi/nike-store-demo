@@ -30,13 +30,13 @@ export const DifferentChildren = Template.bind({});
 DifferentChildren.args = {
   children: (
     <div>
-      <h1>Completely</h1>
-      <h3 style={{ paddingTop: 8 }}>
-        Diff<strong>e</strong>re<em>n</em>t
-      </h3>
-      <p>Children</p>
+      <h1>Please run:</h1>
+      <h2 style={{ paddingTop: 8 }}>yarn start</h2>
+      <p>Because it shows pagination, API calls, and other cool stuff</p>
       <Flex style={{ paddingTop: 8 }}>
-        <Button>Another button example</Button>
+        <Button onClick={() => alert('ahh, you got me')}>
+          Don't click me. I do nothing.
+        </Button>
       </Flex>
     </div>
   ),
