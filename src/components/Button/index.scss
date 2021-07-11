@@ -5,12 +5,12 @@
   height: 43px;
   background: $buttonBackground;
   border-radius: 4px;
-  border: none;
   color: $primaryColor;
   font-family: 'Rocgrotesk';
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
+  border: 2px solid $primaryColor;
 
   &:hover {
     background: $buttonBackgroundHover;
@@ -19,5 +19,20 @@
   &:active {
     transition: 0s;
     background: $buttonBackgroundActive;
+  }
+
+  &.primary {
+    color: $buttonBackground;
+    background: $primaryColor;
+
+    &:hover {
+      background: $linkColorHover;
+      border-color: $linkColorHover;
+    }
+
+    &:active {
+      background: $linkColorActive;
+      border-color: $linkColorActive;
+    }
   }
 }

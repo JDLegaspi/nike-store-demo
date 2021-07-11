@@ -1,6 +1,7 @@
 import Flex from 'components/Flex';
 import React from 'react';
 import { getCurrencyString, getPriceRounded } from 'utils/Helpers';
+import './index.scss';
 
 interface PriceProps {
   retailerPrice: number;

@@ -51,10 +51,10 @@ $className: zd-product-page;
   }
 }
 
-// REFACTOR THIS
-.discounted-price {
-  margin-left: 8px;
-  font-size: 14px;
-  color: $discountColor;
-  text-decoration: line-through;
+.#{$className}-call-to-action {
+  padding: 12px 0;
+
+  > button:not(:first-child) {
+    margin-left: 12px;
+  }
 }

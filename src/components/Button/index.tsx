@@ -3,15 +3,24 @@ import './index.scss';
 
 interface ButtonProps {
   onClick?: () => void;
+  primary?: boolean;
 }
 
-const Button: React.FC<ButtonProps> = ({ onClick, children }) => {
+const Button: React.FC<ButtonProps> = ({
+  onClick,
+  children,
+  primary = false,
+}) => {
   function handleOnClick() {
     if (onClick) onClick();
   }
 
   return (
-    <button type="button" className="zd-button" onClick={handleOnClick}>
+    <button
+      type="button"
+      className={`zd-button ${primary ? 'primary' : ''}`}
+      onClick={handleOnClick}
+    >
       {children}
     </button>
   );

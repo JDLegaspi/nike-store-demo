@@ -5,6 +5,7 @@ import { Product } from 'utils/types/Product';
 import ReactHtmlParser from 'react-html-parser';
 import Price from 'components/Price';
 import './index.scss';
+import Button from 'components/Button';
 
 interface ProductPageProps {
   product: Product;
@@ -55,6 +56,10 @@ const ProductPage: React.FC<ProductPageProps> = ({ product }) => {
                 }
               />
             </div>
+            <Flex className="zd-product-page-call-to-action">
+              <Button primary>Buy now</Button>
+              <Button>Add to cart</Button>
+            </Flex>
             <p>{ReactHtmlParser(long_description)}</p>
           </div>
         </Flex>

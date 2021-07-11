@@ -1,0 +1,8 @@
+@import '/src/utils/styles/colors.scss';
+
+.discounted-price {
+  margin-left: 8px;
+  font-size: 14px;
+  color: $discountColor;
+  text-decoration: line-through;
+}
