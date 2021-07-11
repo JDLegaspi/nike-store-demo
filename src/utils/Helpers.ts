@@ -9,8 +9,15 @@ export function getPriceRounded(price: number) {
 export function getCurrencyString(currency: string): string {
   let currencyString = '$';
 
-  if (currency === 'AUD') {
-    currencyString = 'A$';
+  switch (currency) {
+    case 'AUD':
+      currencyString = 'A$';
+      break;
+    case 'JPY':
+      currencyString = 'JP¥';
+      break;
+    case 'EUR':
+      currencyString = '€';
   }
 
   return currencyString;

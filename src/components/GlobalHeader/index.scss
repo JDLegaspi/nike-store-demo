@@ -1,0 +1,31 @@
+@import '/src/utils/styles/colors.scss';
+
+.zd-global-header {
+  background-color: $globalHeader;
+  color: $white;
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+
+  > div {
+    margin-right: 12px;
+  }
+
+  select {
+    border-radius: 5px;
+    width: 100px;
+    padding: 5px 35px 5px 5px;
+    font-size: 16px;
+    border: none;
+    height: 34px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: url(https://cdn.iconscout.com/icon/free/png-256/caret-down-arrow-navigation-44553.png)
+      96% / 15% no-repeat #eee;
+
+    &:active {
+      border: 1px solid rgb(202, 202, 202);
+    }
+  }
+}

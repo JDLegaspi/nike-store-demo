@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Button from 'components/Button';
 import Flex from 'components/Flex';
+import GlobalHeader from 'components/GlobalHeader';
 import Hero from 'components/Hero';
 import SearchResults from 'components/SearchResults';
 import Wrapper from 'components/Wrapper';
@@ -23,6 +24,7 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
     gender ?? undefined
   );
   const [products, setProducts] = useState<Product[]>([]);
+  const [selectedCurrency, setSelectedCurrency] = useState<string>('AUD');
   const [totalNumberProducts, setTotalNumberProducts] = useState<number>(0);
   const [retailers, setRetailers] = useState<string[]>([]);
   const [queryPage, setQueryPage] = useState(1);
@@ -36,7 +38,7 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
       setProductsLoading(true);
 
       try {
-        let queryUrl = `https://api.theurge.com.au/search-results?brands=Nike&page=${queryPage}&currency=AUD`;
+        let queryUrl = `https://api.theurge.com.au/search-results?brands=Nike&page=${queryPage}&currency=${selectedCurrency}`;
         if (currentGender) queryUrl = queryUrl + `&gender=${currentGender}`;
 
         let productsResponse = await axios.get<SearchResultsAPIResponse>(
@@ -74,7 +76,14 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
         setProductsLoading(false);
       }
     }
-  }, [products, retailers, queryPage, currentPage, currentGender]);
+  }, [
+    products,
+    retailers,
+    queryPage,
+    currentPage,
+    currentGender,
+    selectedCurrency,
+  ]);
 
   useEffect(() => {
     getProducts();
@@ -83,12 +92,16 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
   useEffect(() => {
     if (gender !== currentGender) {
       setCurrentGender(gender ?? undefined);
-      setProducts([]);
-      setQueryPage(1);
-      setCurrentPage(0);
-      setSelectedProduct(undefined);
+      resetSearch();
     }
   }, [gender, currentGender]);
+
+  function resetSearch() {
+    setProducts([]);
+    setQueryPage(1);
+    setCurrentPage(0);
+    setSelectedProduct(undefined);
+  }
 
   function handleSelectProduct(product?: Product) {
     setSelectedProduct(product ?? undefined);
@@ -104,6 +117,11 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
 
   function handleSelectGender(selectedGender: string) {
     history.push(`/${selectedGender}`);
+  }
+
+  function handleCurrencyChange(currency: string) {
+    setSelectedCurrency(currency);
+    resetSearch();
   }
 
   function getHeader() {
@@ -134,6 +152,10 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
   return (
     <>
       <div>
+        <GlobalHeader
+          onCurrencyChange={handleCurrencyChange}
+          selectedCurrency={selectedCurrency}
+        />
         {getHeader()}
         <Wrapper>
           <SearchResults
