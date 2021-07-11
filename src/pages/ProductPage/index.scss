@@ -1,4 +1,4 @@
-@import '/src/styles/colors.scss';
+@import '/src/index.scss';
 
 .zd-product-page-img-wrapper {
   overflow: hidden;
@@ -16,10 +16,18 @@
   > div {
     flex: 1;
   }
+
+  @media screen and (max-width: $breakpointMobile) {
+    flex-direction: column;
+  }
 }
 
 .zd-product-page-info {
+  padding-left: 24px;
 
+  @media screen and (max-width: $breakpointMobile) {
+    padding-left: 0;
+  }
 }
 
 // REFACTOR THIS
