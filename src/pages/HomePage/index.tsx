@@ -150,6 +150,7 @@ const HomePage: React.FC<HomePageProps> = ({ gender }) => {
       <ReactModal
         isOpen={selectedProduct !== undefined}
         onRequestClose={handleUnselectProduct}
+        ariaHideApp={false}
       >
         {selectedProduct !== undefined && (
           <div className="zd-modal-product">
