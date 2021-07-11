@@ -1,6 +1,12 @@
 @import '/src/index.scss';
 
-.zd-product-page-img-wrapper {
+$className: zd-product-page;
+
+.#{$className} {
+  padding-top: 24px;
+}
+
+.#{$className}-img-wrapper {
   overflow: hidden;
 
   > img {
@@ -12,7 +18,21 @@
   }
 }
 
-.zd-product-page-flex-wrapper {
+.#{$className}-color {
+  padding: 16px 0;
+}
+
+.#{$className}-price {
+  font-size: 20px;
+}
+
+.#{$className}-gender {
+  color: $extraInfoColor;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+.#{$className}-flex-wrapper {
   > div {
     flex: 1;
   }
@@ -22,8 +42,9 @@
   }
 }
 
-.zd-product-page-info {
+.#{$className}-info {
   padding-left: 24px;
+  padding-top: 24px;
 
   @media screen and (max-width: $breakpointMobile) {
     padding-left: 0;

@@ -1,15 +1,14 @@
 import axios from 'axios';
-import Button from 'components/Button';
-import Flex from 'components/Flex';
-import Hero from 'components/Hero';
-import SearchResults from 'components/SearchResults';
-import Wrapper from 'components/Wrapper';
 import ProductPage from 'pages/ProductPage';
+import SearchResultsPage from 'pages/SearchResultsPage';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Product, SearchResultsAPIResponse } from 'types/Product';
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Product, SearchResultsAPIResponse } from 'utils/types/Product';
 import './index.scss';
 
 const HomePage: React.FC = () => {
+  const { path } = useRouteMatch();
+
   const [products, setProducts] = useState<Product[]>([]);
   const [totalNumberProducts, setTotalNumberProducts] = useState<number>(0);
   const [retailers, setRetailers] = useState<string[]>([]);
@@ -17,7 +16,6 @@ const HomePage: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [productsLoading, setProductsLoading] = useState<boolean>(false);
   const [productsError, setProductsError] = useState<string>();
-  const [selectedProduct, setSelectedProduct] = useState<Product>();
 
   const getProducts = useCallback(async () => {
     if (currentPage !== queryPage) {
@@ -61,51 +59,30 @@ const HomePage: React.FC = () => {
     setQueryPage(queryPage + 1);
   }
 
-  function handleProductSelected(product: Product) {
-    setSelectedProduct(product);
-  }
-
   useEffect(() => {
     getProducts();
   }, [getProducts]);
 
   // NOTE TO SELF: when changing currency, route to a different route with currency as params
 
-  if (selectedProduct) {
-    return (
-      <ProductPage
-        product={selectedProduct}
-        onPageBack={() => setSelectedProduct(undefined)}
-      />
-    );
-  }
+  console.log('hi');
 
   return (
-    <div>
-      <Hero>
-        <div className="zd-home-page-content">
-          <h1>Nike React Sneakers</h1>
-          <h2>Pay in 4 interest-free installments.</h2>
-          <Flex style={{ paddingTop: 8 }}>
-            <div style={{ paddingRight: 16 }}>
-              <Button>Men</Button>
-            </div>
-            <Button>Women</Button>
-          </Flex>
-        </div>
-      </Hero>
-      <Wrapper>
-        <SearchResults
+    <Switch>
+      <Route exact path={path}>
+        <SearchResultsPage
           products={products}
           productsLoading={productsLoading && retailers.length === 0}
           productsError={productsError}
           totalNumberProducts={totalNumberProducts}
           totalNumberRetailers={retailers.length}
           onScrollToBottom={handleScrollToBottom}
-          onProductSelected={handleProductSelected}
         />
-      </Wrapper>
-    </div>
+      </Route>
+      <Route path={`${path}/:productId`}>
+        <ProductPage products={products} />
+      </Route>
+    </Switch>
   );
 };
 

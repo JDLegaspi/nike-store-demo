@@ -1,9 +1,11 @@
 import Product from 'components/Product';
-import { Product as ProductObject } from 'types/Product';
+import { Product as ProductObject } from 'utils/types/Product';
 import React from 'react';
 import './index.scss';
 import SearchInfo from './SearchInfo';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import ErrorText from 'components/ErrorText';
+import { useHistory } from 'react-router-dom';
 
 interface SearchResultsProps {
   products: ProductObject[];
@@ -12,7 +14,6 @@ interface SearchResultsProps {
   totalNumberProducts: number;
   totalNumberRetailers: number;
   onScrollToBottom: () => void;
-  onProductSelected?: (product: ProductObject) => void;
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({
@@ -22,14 +23,19 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   totalNumberProducts,
   totalNumberRetailers,
   onScrollToBottom,
-  onProductSelected,
 }) => {
+  const history = useHistory();
+
   function handleProductClick(product: ProductObject) {
-    if (onProductSelected) onProductSelected(product);
+    history.push(`/${product.id}`);
   }
 
   if (productsError) {
-    return <div className="zd-search-error">{productsError}</div>;
+    return (
+      <div style={{ marginTop: 20 }}>
+        <ErrorText>{productsError}</ErrorText>
+      </div>
+    );
   }
 
   if (productsLoading) {
@@ -61,12 +67,12 @@ const SearchResults: React.FC<SearchResultsProps> = ({
             const {
               attributes: {
                 e_image_urls_detail_jpg,
+                e_retailer_display_domain,
                 converted_currency,
                 converted_retailer_price,
                 converted_sale_price,
                 currency,
                 product_name,
-                retailer_url,
                 retailer_price,
                 sale_price,
               },
@@ -79,7 +85,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                   converted_currency !== '' ? converted_currency : currency
                 }
                 productName={product_name}
-                retailerUrl={retailer_url}
+                retailerUrl={e_retailer_display_domain}
                 retailerPrice={
                   converted_currency !== ''
                     ? converted_retailer_price

@@ -1,16 +1,33 @@
 import Flex from 'components/Flex';
 import Wrapper from 'components/Wrapper';
 import React from 'react';
-import { Product } from 'types/Product';
-
+import { Product } from 'utils/types/Product';
+import ReactHtmlParser from 'react-html-parser';
+import Price from 'components/Price';
 import './index.scss';
+import { useHistory, useParams } from 'react-router-dom';
+import ErrorText from 'components/ErrorText';
 
 interface ProductPageProps {
-  product: Product;
-  onPageBack: () => void;
+  products: Product[];
 }
 
-const ProductPage: React.FC<ProductPageProps> = ({ product, onPageBack }) => {
+const ProductPage: React.FC<ProductPageProps> = ({ products }) => {
+  const history = useHistory();
+
+  console.log('---------------');
+  console.log('hi there');
+  console.log('---------------');
+
+  let { productId } = useParams<{ productId: string }>();
+
+  const product = products.find((product) => product.id === productId);
+
+  if (!product) {
+    history.push('/');
+    return <ErrorText>Could not find product.</ErrorText>;
+  }
+
   const {
     attributes: {
       e_image_urls_og,
@@ -23,67 +40,34 @@ const ProductPage: React.FC<ProductPageProps> = ({ product, onPageBack }) => {
       sale_price,
       converted_retailer_price,
       converted_sale_price,
+      gender,
     },
   } = product;
 
-  // REFACTOR THIS
-  function getPriceRounded(price: number) {
-    return (Math.round(price * 100) / 100).toFixed(2);
-  }
-
-  function getCurrencyString(): string {
-    let currencyString = '$';
-
-    if (
-      converted_currency ? converted_currency === 'AUD' : currency === 'AUD'
-    ) {
-      currencyString = 'A$';
-    }
-
-    return currencyString;
-  }
-
-  function getPriceElement(
-    retailerPrice: number,
-    salePrice?: number
-  ): React.ReactNode {
-    let shownPrice = getPriceRounded((salePrice ?? retailerPrice) / 4);
-
-    let priceString: string = `${getCurrencyString()}${shownPrice}`;
-
-    return (
-      <Flex alignItems="center">
-        <strong className="product-price">{priceString}</strong>
-        {salePrice && (
-          <strong className="discounted-price">
-            {getCurrencyString()}
-            {getPriceRounded(retailerPrice / 4)}
-          </strong>
-        )}
-      </Flex>
-    );
-  }
-
-  // END REFACTOR THIS
-
   return (
-    <Wrapper>
+    <Wrapper className="zd-product-page">
       <Flex className="zd-product-page-flex-wrapper">
         <div className="zd-product-page-img-wrapper">
           <img src={e_image_urls_og} alt={product_name} />
         </div>
         <div className="zd-product-page-info">
+          <div className="zd-product-page-gender">{gender}</div>
           <h2>{product_name}</h2>
-          <h4>{color}</h4>
-          <h3>
-            {getPriceElement(
-              converted_retailer_price !== 0
-                ? converted_retailer_price
-                : retailer_price,
-              converted_sale_price !== 0 ? converted_sale_price : sale_price
-            )}
-          </h3>
-          <p>{long_description}</p>
+          <div className="zd-product-page-color">{color}</div>
+          <div className="zd-product-page-price">
+            <Price
+              retailerPrice={
+                converted_retailer_price !== 0
+                  ? converted_retailer_price
+                  : retailer_price
+              }
+              salePrice={
+                converted_sale_price !== 0 ? converted_sale_price : sale_price
+              }
+              currency={converted_currency ?? currency}
+            />
+          </div>
+          <p>{ReactHtmlParser(long_description)}</p>
         </div>
       </Flex>
     </Wrapper>

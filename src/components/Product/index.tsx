@@ -1,5 +1,6 @@
-import Flex from 'components/Flex';
+import Price from 'components/Price';
 import React from 'react';
+import { getCurrencyString, getPriceRounded } from 'utils/Helpers';
 import './index.scss';
 
 interface ProductProps {
@@ -21,41 +22,6 @@ const Product: React.FC<ProductProps> = ({
   imageUrl,
   onProductClick,
 }) => {
-  const urlArray = retailerUrl.split('/');
-  const strippedUrl = urlArray[2];
-
-  function getPriceRounded(price: number) {
-    return (Math.round(price * 100) / 100).toFixed(2);
-  }
-
-  function getCurrencyString(): string {
-    let currencyString = '$';
-
-    if (currency === 'AUD') {
-      currencyString = 'A$';
-    }
-
-    return currencyString;
-  }
-
-  function getPriceElement(): React.ReactNode {
-    let shownPrice = getPriceRounded((salePrice ?? retailerPrice) / 4);
-
-    let priceString: string = `${getCurrencyString()}${shownPrice}`;
-
-    return (
-      <Flex alignItems="center">
-        <strong className="product-price">{priceString}</strong>
-        {salePrice && (
-          <strong className="discounted-price">
-            {getCurrencyString()}
-            {getPriceRounded(retailerPrice / 4)}
-          </strong>
-        )}
-      </Flex>
-    );
-  }
-
   return (
     <div className="zd-product" onClick={onProductClick}>
       <div className="zd-product-inner">
@@ -63,10 +29,16 @@ const Product: React.FC<ProductProps> = ({
           <img src={imageUrl} alt={productName} />
         </div>
         <p className="zd-product-name">{productName}</p>
-        <span className="zd-product-retail-url">{strippedUrl}</span>
-        <div className="zd-product-price">{getPriceElement()}</div>
+        <span className="zd-product-retail-url">{retailerUrl}</span>
+        <div className="zd-product-price">
+          <Price
+            currency={currency}
+            retailerPrice={retailerPrice}
+            salePrice={salePrice}
+          />
+        </div>
         <div className="zd-product-payment-plan">
-          {getCurrencyString()}
+          {getCurrencyString(currency)}
           {getPriceRounded(salePrice ?? retailerPrice)} split into 4 easy
           payments
         </div>
