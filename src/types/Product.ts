@@ -3,6 +3,7 @@ export interface ProductAttributes {
   converted_currency: string;
   converted_retailer_price: number;
   converted_sale_price: number;
+  color: string;
   currency: string;
   e_affiliate_url: string;
   e_brand_formatted: string;

@@ -9,6 +9,7 @@ interface ProductProps {
   currency: string;
   retailerUrl: string;
   imageUrl: string;
+  onProductClick: () => void;
 }
 
 const Product: React.FC<ProductProps> = ({
@@ -18,6 +19,7 @@ const Product: React.FC<ProductProps> = ({
   retailerPrice,
   salePrice,
   imageUrl,
+  onProductClick,
 }) => {
   const urlArray = retailerUrl.split('/');
   const strippedUrl = urlArray[2];
@@ -55,7 +57,7 @@ const Product: React.FC<ProductProps> = ({
   }
 
   return (
-    <div className="zd-product">
+    <div className="zd-product" onClick={onProductClick}>
       <div className="zd-product-inner">
         <div className="zd-product-img-wrapper">
           <img src={imageUrl} alt={productName} />

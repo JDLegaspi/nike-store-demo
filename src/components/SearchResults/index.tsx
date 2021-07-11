@@ -1,17 +1,18 @@
 import Product from 'components/Product';
-import { Product as ProductType } from 'types/Product';
+import { Product as ProductObject } from 'types/Product';
 import React from 'react';
 import './index.scss';
 import SearchInfo from './SearchInfo';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 interface SearchResultsProps {
-  products: ProductType[];
+  products: ProductObject[];
   productsLoading?: boolean;
   productsError?: string;
   totalNumberProducts: number;
   totalNumberRetailers: number;
   onScrollToBottom: () => void;
+  onProductSelected?: (product: ProductObject) => void;
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({
@@ -21,7 +22,12 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   totalNumberProducts,
   totalNumberRetailers,
   onScrollToBottom,
+  onProductSelected,
 }) => {
+  function handleProductClick(product: ProductObject) {
+    if (onProductSelected) onProductSelected(product);
+  }
+
   if (productsError) {
     return <div className="zd-search-error">{productsError}</div>;
   }
@@ -84,6 +90,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
                     ? converted_sale_price
                     : sale_price
                 }
+                onProductClick={() => handleProductClick(product)}
               />
             );
           })}

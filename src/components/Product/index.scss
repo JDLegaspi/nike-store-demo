@@ -9,25 +9,6 @@ $class-name: zd-product;
   .#{$class-name}-inner {
     cursor: pointer;
 
-    .#{$class-name}-img-wrapper {
-      height: 400px;
-      overflow: hidden;
-      border-radius: 20px;
-      margin-bottom: 22px;
-      position: relative;
-
-      > img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        transition: 0.2s;
-        object-fit: cover;
-
-        width: 100%;
-        height: 100%;
-      }
-    }
-
     .#{$class-name}-name {
       font-size: 16px;
       font-weight: 600;
@@ -57,9 +38,26 @@ $class-name: zd-product;
       color: $extraInfoColor;
     }
   }
+}
 
-  &:hover {
-    .#{$class-name}-img-wrapper > img {
+.#{$class-name}-img-wrapper {
+  height: 400px;
+  overflow: hidden;
+  border-radius: 20px;
+  margin-bottom: 22px;
+  position: relative;
+
+  > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: 0.2s;
+    object-fit: cover;
+
+    width: 100%;
+    height: 100%;
+
+    &:hover {
       top: -5%;
       left: -5%;
       width: 110%;

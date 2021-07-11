@@ -1,0 +1,31 @@
+@import '/src/styles/colors.scss';
+
+.zd-product-page-img-wrapper {
+  overflow: hidden;
+
+  > img {
+    transition: 0.2s;
+    object-fit: cover;
+
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.zd-product-page-flex-wrapper {
+  > div {
+    flex: 1;
+  }
+}
+
+.zd-product-page-info {
+
+}
+
+// REFACTOR THIS
+.discounted-price {
+  margin-left: 8px;
+  font-size: 14px;
+  color: $discountColor;
+  text-decoration: line-through;
+}

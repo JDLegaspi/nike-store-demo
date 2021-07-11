@@ -4,11 +4,12 @@ import Flex from 'components/Flex';
 import Hero from 'components/Hero';
 import SearchResults from 'components/SearchResults';
 import Wrapper from 'components/Wrapper';
+import ProductPage from 'pages/ProductPage';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Product, SearchResultsAPIResponse } from 'types/Product';
 import './index.scss';
 
-const Nike: React.FC = () => {
+const HomePage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [totalNumberProducts, setTotalNumberProducts] = useState<number>(0);
   const [retailers, setRetailers] = useState<string[]>([]);
@@ -16,6 +17,7 @@ const Nike: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [productsLoading, setProductsLoading] = useState<boolean>(false);
   const [productsError, setProductsError] = useState<string>();
+  const [selectedProduct, setSelectedProduct] = useState<Product>();
 
   const getProducts = useCallback(async () => {
     if (currentPage !== queryPage) {
@@ -59,9 +61,24 @@ const Nike: React.FC = () => {
     setQueryPage(queryPage + 1);
   }
 
+  function handleProductSelected(product: Product) {
+    setSelectedProduct(product);
+  }
+
   useEffect(() => {
     getProducts();
   }, [getProducts]);
+
+  // NOTE TO SELF: when changing currency, route to a different route with currency as params
+
+  if (selectedProduct) {
+    return (
+      <ProductPage
+        product={selectedProduct}
+        onPageBack={() => setSelectedProduct(undefined)}
+      />
+    );
+  }
 
   return (
     <div>
@@ -85,10 +102,11 @@ const Nike: React.FC = () => {
           totalNumberProducts={totalNumberProducts}
           totalNumberRetailers={retailers.length}
           onScrollToBottom={handleScrollToBottom}
+          onProductSelected={handleProductSelected}
         />
       </Wrapper>
     </div>
   );
 };
 
-export default Nike;
+export default HomePage;
