@@ -35,6 +35,7 @@ $class-name: zd-product;
   border-radius: 20px;
   margin-bottom: 22px;
   position: relative;
+  border: 10px solid $productBorderColor;
 
   > img {
     position: absolute;

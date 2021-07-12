@@ -24,9 +24,9 @@ const GlobalHeader: React.FC<GlobalHeaderProps> = ({
       <Wrapper>
         <Flex justifyContent="flex-end" alignItems="center">
           <div className="zd-currency-select-label">Selected currency:</div>
-          <select onChange={handleOnChange}>
+          <select onChange={handleOnChange} value={selectedCurrency}>
             {currencies.map((currency) => (
-              <option selected={selectedCurrency === currency} value={currency}>
+              <option key={currency} value={currency}>
                 {currency}
               </option>
             ))}

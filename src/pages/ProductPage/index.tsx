@@ -64,7 +64,9 @@ const ProductPage: React.FC<ProductPageProps> = ({ product }) => {
             </Flex>
             <div className="zd-product-page-info-section">
               <h4>Description</h4>
-              <div>{ReactHtmlParser(long_description)}</div>
+              <div className="zd-product-page-info-section-description">
+                {ReactHtmlParser(long_description)}
+              </div>
             </div>
             {(e_shipping_link || e_returns_link) && (
               <div className="zd-product-page-info-section">
