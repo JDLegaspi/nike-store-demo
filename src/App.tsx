@@ -2,7 +2,7 @@ import HomePage from 'pages/HomePage';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 
-function App() {
+const App: React.FC = () => {
   return (
     <Router>
       <Switch>
@@ -18,6 +18,6 @@ function App() {
       </Switch>
     </Router>
   );
-}
+};
 
 export default App;

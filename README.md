@@ -34,5 +34,5 @@ Opens the project in Storybook. You can view all the components as individual st
 
 ## Technologies used
 
-- [axios](https://github.com/axios/axios) for data fetching
+- [Axios](https://github.com/axios/axios) for data fetching
 - [Storybook](https://github.com/storybookjs/storybook) for component staging
